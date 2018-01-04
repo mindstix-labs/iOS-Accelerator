@@ -4,6 +4,7 @@ target 'baseline' do
   use_frameworks!
   pod 'Alamofire'
   pod 'Firebase/Core'
+  pod 'Crashlytics', '~> 3.9.3'
   pod 'Mantle'
   pod 'SDWebImage'
   
