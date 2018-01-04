@@ -81,14 +81,46 @@ class WeatherReportViewController: UIViewController {
             }
             self.weatherList = forecastDetails.weatherDetails
         }
-        
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-            AnalyticsParameterItemID: "id-\("title")" as NSObject,
-            AnalyticsParameterItemName: "title" as NSObject,
-            AnalyticsParameterContentType: "cont" as NSObject
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
+            AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterItemName: "WeatherReportViewController" as NSObject,
+            AnalyticsParameterContentType: "viewDidLoad" as NSObject
             ])
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
+            AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterItemName: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterContentType: "viewWillAppear" as NSObject
+            ])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
+            AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterItemName: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterContentType: "viewDidAppear" as NSObject
+            ])
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
+            AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterItemName: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterContentType: "viewWillDisappear" as NSObject
+            ])
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
+            AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterItemName: "id-WeatherReportViewController" as NSObject,
+            AnalyticsParameterContentType: "viewDidDisappear" as NSObject
+            ])
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

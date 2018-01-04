@@ -27,8 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-      
-        // Load a named file.
+        
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
+            AnalyticsParameterItemID: "id-AppDelegate" as NSObject,
+            AnalyticsParameterItemName: "AppDelegate" as NSObject,
+            AnalyticsParameterContentType: "didFinishLaunchingWithOptions" as NSObject
+            ])
+        
+        // Load a named plist file.
         let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         guard let fileopts = FirebaseOptions.init(contentsOfFile: filePath!)
             else {

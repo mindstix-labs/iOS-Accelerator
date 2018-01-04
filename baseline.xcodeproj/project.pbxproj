@@ -10,10 +10,6 @@
 		623ED1F77D9A33D026CA136D /* Pods_baselineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2CFE4C7E6BDBF79812DE40C /* Pods_baselineUITests.framework */; };
 		9F70D30128D6F79981EF9F2C /* Pods_baselineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541CA003449616FDB6D3277B /* Pods_baselineTests.framework */; };
 		A02D49871FF1039200199B62 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02D49861FF1039200199B62 /* AdSupport.framework */; };
-		A02D49AA1FF2363C00199B62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02D49A31FF2363C00199B62 /* GoogleService-Info.plist */; };
-		A02D49AB1FF2363C00199B62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02D49A51FF2363C00199B62 /* GoogleService-Info.plist */; };
-		A02D49AC1FF2363C00199B62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02D49A71FF2363C00199B62 /* GoogleService-Info.plist */; };
-		A02D49AD1FF2363C00199B62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02D49A91FF2363C00199B62 /* GoogleService-Info.plist */; };
 		A03CAAAB1FECFBB200AE56DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03CAAAA1FECFBB200AE56DA /* AppDelegate.swift */; };
 		A03CAAAD1FECFBB200AE56DA /* WeatherReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03CAAAC1FECFBB200AE56DA /* WeatherReportViewController.swift */; };
 		A03CAAB01FECFBB200AE56DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03CAAAE1FECFBB200AE56DA /* Main.storyboard */; };
@@ -470,14 +466,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A02D49AC1FF2363C00199B62 /* GoogleService-Info.plist in Resources */,
-				A02D49AD1FF2363C00199B62 /* GoogleService-Info.plist in Resources */,
 				A03CAAB51FECFBB200AE56DA /* LaunchScreen.storyboard in Resources */,
 				A03CAB0E1FED271800AE56DA /* Localizable.strings in Resources */,
 				A03CAAB21FECFBB200AE56DA /* Assets.xcassets in Resources */,
 				A03CAAB01FECFBB200AE56DA /* Main.storyboard in Resources */,
-				A02D49AA1FF2363C00199B62 /* GoogleService-Info.plist in Resources */,
-				A02D49AB1FF2363C00199B62 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
