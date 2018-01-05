@@ -21,5 +21,6 @@
 import Foundation
 
 struct Constants {
+    static let city =  "Pune,in"
 }
 

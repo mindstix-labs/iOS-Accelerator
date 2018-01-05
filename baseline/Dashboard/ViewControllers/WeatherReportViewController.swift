@@ -34,6 +34,8 @@ import SDWebImage
 
 class WeatherReportViewController: UIViewController {
     
+    @IBOutlet var topView: UIView!
+    @IBOutlet var todaysForecastView: UIView!
     @IBOutlet var cityNameLabel: UILabel!
     @IBOutlet var latitudeLabel: UILabel!
     @IBOutlet var longitudeLabel: UILabel!
@@ -63,23 +65,34 @@ class WeatherReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = String(format: NSLocalizedString("WeatherReportViewController_titleLabel", comment:"" ))
-        
+        self.topView.isHidden = true
+        self.todaysForecastView.isHidden = true
+        self.tableView.isHidden = true
         //initialize weather API helper to set baseUrl, api version and api key.
         let weatherAPIHelper : WeatherAPIHelper = WeatherAPIHelper.init(baseUrlString: baseUrlString, apiVersion: apiVersion, apiKey: appId)
         
-        weatherAPIHelper.getWeatherDataFor(city: "Pune,in") { (weatherDetails: WeatherDetailsModel?, error: Error?) in
-            guard let weatherDetails = weatherDetails else {
-                print("Failed to get weather data.")
-                return
+        weatherAPIHelper.getWeatherDataFor(city: Constants.city) { (weatherDetails: WeatherDetailsModel?, error: Error?) in
+            if( error == nil){
+                guard let weatherDetails = weatherDetails else {
+                    print("Failed to get weather data.")
+                    return
+                }
+                self.populateWeatherDetails(with: weatherDetails)
             }
-            self.populateWeatherDetails(with: weatherDetails)
+            
         }
-        weatherAPIHelper.getForecastDataFor(city: "Pune,in") { (forecastDetails: ForecastDetailsModel?, error: Error?) in
-            guard let forecastDetails = forecastDetails else {
-                print("Failed to get forecast data.")
-                return
+        weatherAPIHelper.getForecastDataFor(city: Constants.city) { (forecastDetails: ForecastDetailsModel?, error: Error?) in
+            if( error == nil) {
+                guard let forecastDetails = forecastDetails else {
+                    print("Failed to get forecast data.")
+                    return
+                }
+                if forecastDetails.weatherDetails != nil {
+                    self.tableView.isHidden = false
+                    self.weatherList = forecastDetails.weatherDetails
+                }
             }
-            self.weatherList = forecastDetails.weatherDetails
+            
         }
         Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
             AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
@@ -132,52 +145,87 @@ class WeatherReportViewController: UIViewController {
      *
      * @param weatherDetails - Weather data received from API.
      */
-    func populateWeatherDetails(with weatherDetails:WeatherDetailsModel){
+    func populateWeatherDetails(with weatherDetails:WeatherDetailsModel) {
+        
         // Show city name
-        self.cityNameLabel.text = weatherDetails.name
+        if let name = weatherDetails.name {
+            self.topView.isHidden = false
+            self.cityNameLabel.text = name
+        }
         
         // Show latitude.
-        self.latitudeLabel.text = String(format: NSLocalizedString("latitudeLabel", comment:"" ), weatherDetails.lat.floatValue)
+        if let latitude = weatherDetails.lat {
+            self.latitudeLabel.text = String(format: NSLocalizedString("latitudeLabel", comment:"" ), latitude.floatValue)
+        }
         
         // Show longitude.
-        self.longitudeLabel.text = String(format: NSLocalizedString("longitudeLabel", comment:"" ), weatherDetails.lon.floatValue)
+        if let longitude = weatherDetails.lon {
+            self.longitudeLabel.text = String(format: NSLocalizedString("longitudeLabel", comment:"" ), longitude.floatValue)
+        }
 
         var tempWeatherDetail = Weather()
-        tempWeatherDetail =  weatherDetails.weather.first
+        if weatherDetails.weather != nil &&  weatherDetails.weather.count > 0 {
+            self.todaysForecastView.isHidden = false
+            tempWeatherDetail =  weatherDetails.weather.first
+        }
         
         // Show weather condition status.
-        self.skyDescriptionLabel.text = String(format: NSLocalizedString("skyDetailsLabel", comment:"" ), (tempWeatherDetail?.weatherMain)!)
+        if let skyDescription = tempWeatherDetail?.weatherMain {
+            self.skyDescriptionLabel.text = String(format: NSLocalizedString("skyDetailsLabel", comment:"" ), skyDescription)
+        }
         
         // Show weather condition icon.
-        let iconBaseUrl: String = Bundle.main.infoDictionary!["WEATHER_ICON_BASE_URL"] as! String
-        let imageUrl = iconBaseUrl + (tempWeatherDetail?.icon)! + ".png"
-        self.imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
-            self.imageView.image = image;
-        })
+        if let weatherIcon = tempWeatherDetail?.icon, let iconBaseUrl: String = Bundle.main.infoDictionary!["WEATHER_ICON_BASE_URL"] as? String {
+            let imageUrl = iconBaseUrl + weatherIcon + ".png"
+            self.imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
+                if (error != nil) {
+                     self.imageView.image = image;
+                }
+            })
+        }
         
-        // Show temperature.
-        self.temperatureLabel.text = String(format: NSLocalizedString("temperatureLabel", comment:"" ), weatherDetails.weatherDetails.temp.floatValue)
         
-        // Show minimum temperature.
-        self.minTempLabel.text = String(format: NSLocalizedString("minTemperatureLabel", comment:"" ),weatherDetails.weatherDetails.temp_min.floatValue)
-        
-        // Show maximum temperature.
-        self.maxTempLabel.text = String(format: NSLocalizedString("maxTemperatureLabel", comment:"" ),weatherDetails.weatherDetails.temp_max.floatValue)
-        
-        // Show pressure.
-        self.pressureLabel.text = String(format: NSLocalizedString("pressureLabel", comment:"" ),weatherDetails.weatherDetails.pressure.floatValue)
-        
-        // Show humidity.
-        self.humidityLabel.text = String(format: NSLocalizedString("humidityLabel", comment:"" ),weatherDetails.weatherDetails.humidity.floatValue)
+        if(weatherDetails.weatherDetails != nil) {
+            // Show temperature.
+            if let temperature = weatherDetails.weatherDetails.temp {
+                self.temperatureLabel.text = String(format: NSLocalizedString("temperatureLabel", comment:"" ), temperature.floatValue)
+            }
+            
+            // Show minimum temperature.
+            if let minTemperature = weatherDetails.weatherDetails.temp_min {
+                self.minTempLabel.text = String(format: NSLocalizedString("minTemperatureLabel", comment:"" ),minTemperature.floatValue)
+            }
+            
+            // Show maximum temperature.
+            if let maxTemperature = weatherDetails.weatherDetails.temp_max {
+                self.maxTempLabel.text = String(format: NSLocalizedString("maxTemperatureLabel", comment:"" ),maxTemperature.floatValue)
+            }
+            
+            // Show pressure.
+            if let pressure = weatherDetails.weatherDetails.pressure {
+                self.pressureLabel.text = String(format: NSLocalizedString("pressureLabel", comment:"" ),pressure.floatValue)
+            }
+            
+            // Show humidity.
+            if let humidity = weatherDetails.weatherDetails.humidity {
+                self.humidityLabel.text = String(format: NSLocalizedString("humidityLabel", comment:"" ),humidity.floatValue)
+            }
+        }
         
         // Show wind speed.
-        self.windLabel.text = String(format: NSLocalizedString("windLabel", comment:"" ),weatherDetails.wind.speed.floatValue)
+        if weatherDetails.wind != nil, let wind = weatherDetails.wind.speed {
+            self.windLabel.text = String(format: NSLocalizedString("windLabel", comment:"" ),wind.floatValue)
+        }
         
         // Show sunrise time.
-        self.sunriseTimeLabel.text = String(format: NSLocalizedString("sunriseLabel", comment:"" ), self.convertTimeToString(time: weatherDetails.sunrise))
+        if let sunriseTime = weatherDetails.sunrise {
+            self.sunriseTimeLabel.text = String(format: NSLocalizedString("sunriseLabel", comment:"" ), self.convertTimeToString(time: sunriseTime))
+        }
         
         // Show sunset time.
-        self.sunsetTimeLabel.text = String(format: NSLocalizedString("sunsetLabel", comment:"" ), self.convertTimeToString(time: weatherDetails.sunset))
+        if let sunsetTime = weatherDetails.sunset {
+            self.sunsetTimeLabel.text = String(format: NSLocalizedString("sunsetLabel", comment:"" ), self.convertTimeToString(time: sunsetTime))
+        }
     }
     
     /**

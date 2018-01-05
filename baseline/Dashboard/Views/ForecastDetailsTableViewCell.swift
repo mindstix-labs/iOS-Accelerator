@@ -52,7 +52,9 @@ public class ForecastDetailsTableViewCell: UITableViewCell {
         tempWeatherDetail =  details.weather.first
         
         // Show weather condition status.
-        self.skyDescriptionLabel.text = String(format: NSLocalizedString("skyDetailsLabel", comment:"" ), (tempWeatherDetail?.weatherMain)!)
+        if(self.skyDescriptionLabel != nil) {
+            self.skyDescriptionLabel.text = String(format: NSLocalizedString("skyDetailsLabel", comment:"" ), (tempWeatherDetail?.weatherMain)!)
+        }
         
         // Show weather condition icon.
         let iconBaseUrl: String = Bundle.main.infoDictionary!["WEATHER_ICON_BASE_URL"] as! String
@@ -62,26 +64,39 @@ public class ForecastDetailsTableViewCell: UITableViewCell {
         })
         
         // Show temperature.
-        self.temperatureLabel.text = String(format: NSLocalizedString("temperatureLabel", comment:"" ), details.weatherDetails.temp.floatValue)
+        if let temperature = details.weatherDetails.temp {
+            self.temperatureLabel.text = String(format: NSLocalizedString("temperatureLabel", comment:"" ), temperature.floatValue)
+        }
         
         // Show minimum temperature.
-        self.minTempLabel.text = String(format: NSLocalizedString("minTemperatureLabel", comment:"" ),details.weatherDetails.temp_min.floatValue)
+        if let minTemperature = details.weatherDetails.temp_min {
+            self.minTempLabel.text = String(format: NSLocalizedString("minTemperatureLabel", comment:"" ),minTemperature.floatValue)
+        }
         
         // Show maximum temperature.
-        self.maxTempLabel.text = String(format: NSLocalizedString("maxTemperatureLabel", comment:"" ),details.weatherDetails.temp_max.floatValue)
-        
+        if let maxTemperature = details.weatherDetails.temp_max {
+            self.maxTempLabel.text = String(format: NSLocalizedString("maxTemperatureLabel", comment:"" ),maxTemperature.floatValue)
+        }
+
         // Show pressure.
-        self.pressureLabel.text = String(format: NSLocalizedString("pressureLabel", comment:"" ),details.weatherDetails.pressure.floatValue)
+        if let pressure = details.weatherDetails.pressure {
+            self.pressureLabel.text = String(format: NSLocalizedString("pressureLabel", comment:"" ),pressure.floatValue)
+        }
         
         // Show humidity.
-        self.humidityLabel.text = String(format: NSLocalizedString("humidityLabel", comment:"" ),details.weatherDetails.humidity.floatValue)
+        if let humidity = details.weatherDetails.humidity {
+            self.humidityLabel.text = String(format: NSLocalizedString("humidityLabel", comment:"" ),humidity.floatValue)
+        }
         
        // Show wind speed.
-        self.windLabel.text = String(format: NSLocalizedString("windLabel", comment:"" ),details.wind.speed.floatValue)
+        if let wind = details.wind.speed {
+            self.windLabel.text = String(format: NSLocalizedString("windLabel", comment:"" ),wind.floatValue)
+        }
         
         // Show weather data captured time.
-        self.forecastDateTimeLabel.text = String(format: NSLocalizedString("ForecastLabel", comment:"" ), self.convertTimeToString(time: details.detailsCapturedDate! as NSString))
-        
+        if let capturedDate = details.detailsCapturedDate{
+            self.forecastDateTimeLabel.text = String(format: NSLocalizedString("ForecastLabel", comment:"" ), self.convertTimeToString(time: capturedDate as NSString))
+        }
     }
     
     /**

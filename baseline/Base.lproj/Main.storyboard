@@ -358,7 +358,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.98999999999999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jBh-As-aFu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8uU-yn-gFa"/>
                             <constraint firstItem="jBh-As-aFu" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Agb-bD-6yS"/>
@@ -388,6 +388,8 @@
                         <outlet property="sunsetTimeLabel" destination="xUq-gz-c9d" id="ACX-fW-yJg"/>
                         <outlet property="tableView" destination="jBh-As-aFu" id="6BT-Mr-GGJ"/>
                         <outlet property="temperatureLabel" destination="aX7-a2-m2z" id="tPw-Eo-Kby"/>
+                        <outlet property="todaysForecastView" destination="kIa-4E-XeR" id="veu-it-5es"/>
+                        <outlet property="topView" destination="oBw-mv-mJ2" id="3n9-6e-t09"/>
                         <outlet property="windLabel" destination="4g6-S5-tvw" id="TtI-3W-V6i"/>
                     </connections>
                 </viewController>

@@ -59,10 +59,13 @@ public class WeatherAPIHelper {
     
     func getWeatherDataFor (city:String, completionHandler: @escaping WeatherDataCompletionHandler) {
         var completeURLString: String?
-        completeURLString = self.baseUrl! + self.apiVersion! + WEATHER_PATH
+        guard let baseUrl = self.baseUrl, let apiversion = self.apiVersion, let appId = self.appId else {
+            return
+        }
+        completeURLString = baseUrl + apiversion  + WEATHER_PATH
         
         var params: [String: String] = [:]
-        params["appid"] = self.appId
+        params["appid"] = appId
         params["q"] = city
         
         MSBaseService.makeRequest(with:completeURLString!, method: .get, query: params , headers: nil, body: nil, completionHandler: { (response: NSDictionary?, error: Error?) in
@@ -86,11 +89,15 @@ public class WeatherAPIHelper {
     
     func getForecastDataFor (city:String, completionHandler: @escaping ForecastDataCompletionHandler) {
         var completeURLString: String?
-        completeURLString = self.baseUrl! + self.apiVersion!  + FORECAST_PATH
+        
+        guard let baseUrl = self.baseUrl, let apiversion = self.apiVersion, let appId = self.appId else {
+            return
+        }
+        completeURLString = baseUrl + apiversion  + FORECAST_PATH
         
 
         var params: [String: String] = [:]
-        params["appid"] = self.appId
+        params["appid"] = appId
         params["q"] = city
         
         MSBaseService.makeRequest(with:completeURLString!, method: .get, query: params , headers: nil, body: nil, completionHandler: { (response: NSDictionary?, error: Error?) in
