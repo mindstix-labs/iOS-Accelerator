@@ -5,7 +5,6 @@ target 'baseline' do
   pod 'Alamofire'
   pod 'Firebase/Core'
   pod 'Crashlytics', '~> 3.9.3'
-  pod 'Mantle'
   pod 'SDWebImage'
   pod 'AlamofireObjectMapper'
   

@@ -20,7 +20,6 @@
 
 import UIKit
 import Firebase
-import Mantle
 import SDWebImage
 
 

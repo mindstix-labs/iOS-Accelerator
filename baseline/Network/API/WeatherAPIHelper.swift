@@ -19,7 +19,6 @@
 // SOFTWARE.
 
 import Foundation
-import Mantle
 
 public typealias WeatherDataCompletionHandler = (WeatherDetailsModel?, Error?) -> ()
 public typealias ForecastDataCompletionHandler = (ForecastDetailsModel?, Error?) -> ()
