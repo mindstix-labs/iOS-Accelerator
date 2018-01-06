@@ -7,6 +7,7 @@ target 'baseline' do
   pod 'Crashlytics', '~> 3.9.3'
   pod 'Mantle'
   pod 'SDWebImage'
+  pod 'AlamofireObjectMapper'
   
   target 'baselineTests' do
     inherit! :search_paths

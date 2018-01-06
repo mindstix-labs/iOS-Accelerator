@@ -67,16 +67,14 @@ public class WeatherAPIHelper {
         var params: [String: String] = [:]
         params["appid"] = appId
         params["q"] = city
+         var weatherDetails : WeatherDetailsModel? = nil
         
-        MSBaseService.makeRequest(with:completeURLString!, method: .get, query: params , headers: nil, body: nil, completionHandler: { (response: NSDictionary?, error: Error?) in
-            do {
-                
-                let weatherDetails =  try MTLJSONAdapter.model(of: WeatherDetailsModel.self, fromJSONDictionary: response as! [AnyHashable : Any]) as! WeatherDetailsModel
-                completionHandler(weatherDetails,error)
-                
-            } catch {
-                
-            }
+        
+        MSBaseService<WeatherDetailsModel>().makeRequest(with:completeURLString!, method: .get, query: params , headers: nil, body: nil, successCompletionHandler: {response in
+            weatherDetails = response
+            completionHandler(weatherDetails,nil)
+        }, failureCompletionHandler: {error in
+            completionHandler(nil,error)
         })
     }
     
@@ -100,15 +98,13 @@ public class WeatherAPIHelper {
         params["appid"] = appId
         params["q"] = city
         
-        MSBaseService.makeRequest(with:completeURLString!, method: .get, query: params , headers: nil, body: nil, completionHandler: { (response: NSDictionary?, error: Error?) in
-            let userData = response as NSDictionary? as? [AnyHashable: Any] ?? [:]
-            do {
-                
-                let forecastDetails =  try MTLJSONAdapter.model(of: ForecastDetailsModel.self, fromJSONDictionary: userData) as! ForecastDetailsModel
-                completionHandler(forecastDetails,error)
-            } catch {
-                
-            }
+        
+        var forecastDetailsModel : ForecastDetailsModel? = nil
+        MSBaseService<ForecastDetailsModel>().makeRequest(with:completeURLString!, method: .get, query: params , headers: nil, body: nil, successCompletionHandler: {response in
+            forecastDetailsModel = response
+            completionHandler(forecastDetailsModel,nil)
+        }, failureCompletionHandler: {error in
+            completionHandler(nil,error)
         })
     }
 }

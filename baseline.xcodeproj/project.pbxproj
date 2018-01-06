@@ -22,9 +22,9 @@
 		A05F45AD1FF2771D006ADD4F /* MSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F45AC1FF2771D006ADD4F /* MSNetworking.swift */; };
 		A08124A51FFB5630002C2FC8 /* WeatherAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08124A41FFB5630002C2FC8 /* WeatherAPIHelper.swift */; };
 		A08124A91FFB59A5002C2FC8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08124A81FFB59A5002C2FC8 /* Constants.swift */; };
-		A09E082D1FFA0EF9008BA191 /* WeatherDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A09E082C1FFA0EF8008BA191 /* WeatherDetailsModel.m */; };
-		A09E08301FFA1442008BA191 /* ForecastDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A09E082F1FFA1442008BA191 /* ForecastDetailsModel.m */; };
 		A09E08321FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E08311FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift */; };
+		A0CE750B1FFFAAF8001D9D67 /* WeatherDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE750A1FFFAAF8001D9D67 /* WeatherDetailsModel.swift */; };
+		A0CE750D2000F77C001D9D67 /* ForecastDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE750C2000F77C001D9D67 /* ForecastDetailsModel.swift */; };
 		F15C7CE4DAECA71B28726142 /* Pods_baseline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5114EAAC3ECA82619898C636 /* Pods_baseline.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,12 +79,9 @@
 		A05F45AC1FF2771D006ADD4F /* MSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSNetworking.swift; sourceTree = "<group>"; };
 		A08124A41FFB5630002C2FC8 /* WeatherAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIHelper.swift; sourceTree = "<group>"; };
 		A08124A81FFB59A5002C2FC8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A09E082A1FFA0EF8008BA191 /* WeatherDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailsModel.h; sourceTree = "<group>"; };
-		A09E082B1FFA0EF8008BA191 /* baseline-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "baseline-Bridging-Header.h"; sourceTree = "<group>"; };
-		A09E082C1FFA0EF8008BA191 /* WeatherDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailsModel.m; sourceTree = "<group>"; };
-		A09E082E1FFA1442008BA191 /* ForecastDetailsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForecastDetailsModel.h; sourceTree = "<group>"; };
-		A09E082F1FFA1442008BA191 /* ForecastDetailsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForecastDetailsModel.m; sourceTree = "<group>"; };
 		A09E08311FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		A0CE750A1FFFAAF8001D9D67 /* WeatherDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailsModel.swift; sourceTree = "<group>"; };
+		A0CE750C2000F77C001D9D67 /* ForecastDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailsModel.swift; sourceTree = "<group>"; };
 		AEB4AA9E77B3C19910967938 /* Pods-baselineUITests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baselineUITests.prod.xcconfig"; path = "Pods/Target Support Files/Pods-baselineUITests/Pods-baselineUITests.prod.xcconfig"; sourceTree = "<group>"; };
 		E89BBB49DA693DD7D5125E4A /* Pods-baseline.qa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseline.qa.xcconfig"; path = "Pods/Target Support Files/Pods-baseline/Pods-baseline.qa.xcconfig"; sourceTree = "<group>"; };
 		EFA0C7E7FDEF2FA7EA124974 /* Pods-baselineUITests.qa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baselineUITests.qa.xcconfig"; path = "Pods/Target Support Files/Pods-baselineUITests/Pods-baselineUITests.qa.xcconfig"; sourceTree = "<group>"; };
@@ -278,8 +275,7 @@
 		A08124AB1FFCB502002C2FC8 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				A09E082A1FFA0EF8008BA191 /* WeatherDetailsModel.h */,
-				A09E082C1FFA0EF8008BA191 /* WeatherDetailsModel.m */,
+				A0CE750A1FFFAAF8001D9D67 /* WeatherDetailsModel.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -287,8 +283,7 @@
 		A08124AC1FFCB50C002C2FC8 /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				A09E082E1FFA1442008BA191 /* ForecastDetailsModel.h */,
-				A09E082F1FFA1442008BA191 /* ForecastDetailsModel.m */,
+				A0CE750C2000F77C001D9D67 /* ForecastDetailsModel.swift */,
 			);
 			path = Forecast;
 			sourceTree = "<group>";
@@ -296,7 +291,6 @@
 		A08124AD1FFCB514002C2FC8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				A09E082B1FFA0EF8008BA191 /* baseline-Bridging-Header.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -531,16 +525,20 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-baseline/Pods-baseline-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantle/Mantle.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -680,13 +678,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A03CAB1A1FED31C800AE56DA /* MSBaseService.swift in Sources */,
-				A09E08301FFA1442008BA191 /* ForecastDetailsModel.m in Sources */,
+				A0CE750B1FFFAAF8001D9D67 /* WeatherDetailsModel.swift in Sources */,
 				A05F45AD1FF2771D006ADD4F /* MSNetworking.swift in Sources */,
 				A08124A51FFB5630002C2FC8 /* WeatherAPIHelper.swift in Sources */,
+				A0CE750D2000F77C001D9D67 /* ForecastDetailsModel.swift in Sources */,
 				A03CAAAD1FECFBB200AE56DA /* WeatherReportViewController.swift in Sources */,
 				A03CAAAB1FECFBB200AE56DA /* AppDelegate.swift in Sources */,
 				A09E08321FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift in Sources */,
-				A09E082D1FFA0EF9008BA191 /* WeatherDetailsModel.m in Sources */,
 				A08124A91FFB59A5002C2FC8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -823,7 +821,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.baseline.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "baseline/Model/Common/baseline-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WEATHER_API_VERSION = 2.5;
@@ -939,7 +936,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.baseline.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "baseline/Model/Common/baseline-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WEATHER_API_VERSION = 2.5;
@@ -1055,7 +1051,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindstix.baseline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "baseline/Model/Common/baseline-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WEATHER_API_VERSION = 2.5;
@@ -1171,7 +1166,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindstix.baseline.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "baseline/Model/Common/baseline-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WEATHER_API_VERSION = 2.5;

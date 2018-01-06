@@ -82,17 +82,18 @@ class WeatherReportViewController: UIViewController {
             
         }
         weatherAPIHelper.getForecastDataFor(city: Constants.city) { (forecastDetails: ForecastDetailsModel?, error: Error?) in
-            if( error == nil) {
+            if( error == nil){
                 guard let forecastDetails = forecastDetails else {
                     print("Failed to get forecast data.")
                     return
                 }
+                
                 if forecastDetails.weatherDetails != nil {
                     self.tableView.isHidden = false
-                    self.weatherList = forecastDetails.weatherDetails
+                    self.weatherList = forecastDetails.weatherDetails!
                 }
+                
             }
-            
         }
         Analytics.logEvent(AnalyticsEventAppOpen, parameters: [
             AnalyticsParameterItemID: "id-WeatherReportViewController" as NSObject,
@@ -157,23 +158,24 @@ class WeatherReportViewController: UIViewController {
         if let latitude = weatherDetails.lat {
             self.latitudeLabel.text = String(format: NSLocalizedString("latitudeLabel", comment:"" ), latitude.floatValue)
         }
-        
+
         // Show longitude.
         if let longitude = weatherDetails.lon {
             self.longitudeLabel.text = String(format: NSLocalizedString("longitudeLabel", comment:"" ), longitude.floatValue)
         }
 
-        var tempWeatherDetail = Weather()
-        if weatherDetails.weather != nil &&  weatherDetails.weather.count > 0 {
-            self.todaysForecastView.isHidden = false
-            tempWeatherDetail =  weatherDetails.weather.first
-        }
+        var tempWeatherDetail : Weather? = nil
         
+        if weatherDetails.weather != nil &&  (weatherDetails.weather?.count)! > 0 {
+            self.todaysForecastView.isHidden = false
+            tempWeatherDetail =  weatherDetails.weather!.first!
+        }
+
         // Show weather condition status.
         if let skyDescription = tempWeatherDetail?.weatherMain {
             self.skyDescriptionLabel.text = String(format: NSLocalizedString("skyDetailsLabel", comment:"" ), skyDescription)
         }
-        
+
         // Show weather condition icon.
         if let weatherIcon = tempWeatherDetail?.icon, let iconBaseUrl: String = Bundle.main.infoDictionary!["WEATHER_ICON_BASE_URL"] as? String {
             let imageUrl = iconBaseUrl + weatherIcon + ".png"
@@ -183,40 +185,40 @@ class WeatherReportViewController: UIViewController {
                 }
             })
         }
-        
-        
+
+
         if(weatherDetails.weatherDetails != nil) {
             // Show temperature.
-            if let temperature = weatherDetails.weatherDetails.temp {
+            if let temperature = weatherDetails.weatherDetails?.temp {
                 self.temperatureLabel.text = String(format: NSLocalizedString("temperatureLabel", comment:"" ), temperature.floatValue)
             }
-            
+
             // Show minimum temperature.
-            if let minTemperature = weatherDetails.weatherDetails.temp_min {
+            if let minTemperature = weatherDetails.weatherDetails?.temp_min {
                 self.minTempLabel.text = String(format: NSLocalizedString("minTemperatureLabel", comment:"" ),minTemperature.floatValue)
             }
-            
+
             // Show maximum temperature.
-            if let maxTemperature = weatherDetails.weatherDetails.temp_max {
+            if let maxTemperature = weatherDetails.weatherDetails?.temp_max {
                 self.maxTempLabel.text = String(format: NSLocalizedString("maxTemperatureLabel", comment:"" ),maxTemperature.floatValue)
             }
-            
+
             // Show pressure.
-            if let pressure = weatherDetails.weatherDetails.pressure {
+            if let pressure = weatherDetails.weatherDetails?.pressure {
                 self.pressureLabel.text = String(format: NSLocalizedString("pressureLabel", comment:"" ),pressure.floatValue)
             }
-            
+
             // Show humidity.
-            if let humidity = weatherDetails.weatherDetails.humidity {
+            if let humidity = weatherDetails.weatherDetails?.humidity {
                 self.humidityLabel.text = String(format: NSLocalizedString("humidityLabel", comment:"" ),humidity.floatValue)
             }
         }
-        
+
         // Show wind speed.
-        if weatherDetails.wind != nil, let wind = weatherDetails.wind.speed {
+        if weatherDetails.wind != nil, let wind = weatherDetails.wind?.speed {
             self.windLabel.text = String(format: NSLocalizedString("windLabel", comment:"" ),wind.floatValue)
         }
-        
+
         // Show sunrise time.
         if let sunriseTime = weatherDetails.sunrise {
             self.sunriseTimeLabel.text = String(format: NSLocalizedString("sunriseLabel", comment:"" ), self.convertTimeToString(time: sunriseTime))
@@ -227,7 +229,7 @@ class WeatherReportViewController: UIViewController {
             self.sunsetTimeLabel.text = String(format: NSLocalizedString("sunsetLabel", comment:"" ), self.convertTimeToString(time: sunsetTime))
         }
     }
-    
+
     /**
      * Function to convert time to string format.
      *
@@ -245,7 +247,7 @@ class WeatherReportViewController: UIViewController {
 extension WeatherReportViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weatherList.count
+        return self.weatherList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

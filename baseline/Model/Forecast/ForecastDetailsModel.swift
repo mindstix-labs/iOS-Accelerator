@@ -18,15 +18,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Mantle/Mantle.h>
-#import "WeatherDetailsModel.h"
+import Foundation
+import AlamofireObjectMapper
+import ObjectMapper
 
 /**
  * Model class to hold the data of forcast details coming from forecast details API
  *
  */
-@interface ForecastDetailsModel : MTLModel
 
-@property (nonatomic, strong) NSArray <WeatherDetailsModel *> *weatherDetails;
+public class ForecastDetailsModel : Mappable  {
+    public var weatherDetails : Array<WeatherDetailsModel>?
+    
+    required public init?(map: Map) {
+    }
+    public var detailsCapturedDate : String?
+    
+    public func mapping(map: Map) {
+        weatherDetails <- map["list"]
+    }
+}
 
-@end
+

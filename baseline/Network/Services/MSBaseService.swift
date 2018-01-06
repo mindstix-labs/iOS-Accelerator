@@ -20,14 +20,16 @@
 
 import Foundation
 import Alamofire
-
-public typealias MSServiceCompletionHandler = (NSDictionary?, Error?)-> ()
+import AlamofireObjectMapper
+import ObjectMapper
 
 /**
- Responsible for creating and managing `Request` objects and returning response and error
+ Responsible for creating and managing `Request` objects and returning response model and error
  */
 
-public class MSBaseService: NSObject{
+class MSBaseService<Model : Mappable> {
+    
+    var model :  Model!
     
     // MARK: - Request
     
@@ -40,10 +42,9 @@ public class MSBaseService: NSObject{
      - parameter headers:    The HTTP headers. `nil` by default.
      - parameter body:       The parameters. `nil` by default.
      
-     - returns: The response and error.
+     - returns: The response in given model class and error.
      */
-    class func makeRequest(with urlString:String, method: HTTPMethod = .get, query: [String:String]? = nil, headers: [String : String]? = nil, body: [String : Any]? = nil, completionHandler: @escaping MSServiceCompletionHandler) {
-        
+     func makeRequest(with urlString:String, method: HTTPMethod = .get, query: [String:String]? = nil, headers: [String : String]? = nil, body: [String : Any]? = nil, successCompletionHandler : @escaping (_ model : Model) -> Void , failureCompletionHandler : @escaping ((_ error : Error) -> Void ) ) -> Void {
         let completeUrl:String
         
         var params: [String] = []
@@ -61,7 +62,7 @@ public class MSBaseService: NSObject{
         
         //Create request
         guard let url = URL(string: completeUrl) else {
-            completionHandler(nil, MSNetworking.requestUrlError())
+            failureCompletionHandler(MSNetworking.requestUrlError())
             return
         }
         var request = URLRequest(url: url)
@@ -80,7 +81,7 @@ public class MSBaseService: NSObject{
                 request.httpBody = bodyData
             } catch {
                 let bodyError = MSNetworkingError.request(message:"Could not serialize JSON, check input.")
-                completionHandler(nil, bodyError) //Exit if invalid body is provided
+                failureCompletionHandler(bodyError) //Exit if invalid body is provided
             }
         }
         
@@ -96,7 +97,7 @@ public class MSBaseService: NSObject{
         
         //Make request
         Alamofire.request(request)
-            .responseJSON { (response: DataResponse<Any>) in
+            .responseObject { (response: DataResponse<Model>) in
     
                 print("RESPONSE\n")
                 if let httpResponse = response.response {
@@ -109,10 +110,15 @@ public class MSBaseService: NSObject{
 
                 switch response.result {
                 case .success(let value):
-                    completionHandler(value as? NSDictionary, nil)
+                    if response.result.value != nil {
+                        self.model = value
+                        DispatchQueue.main.async {
+                            successCompletionHandler(self.model)
+                        }
+                    }
                 case .failure:
                     guard let data = response.data else {
-                        completionHandler(nil, MSNetworkingError.response(message:"Error response does not contain body."))
+                        failureCompletionHandler(MSNetworkingError.response(message:"Error response does not contain body."))
                         return
                     }
 
@@ -120,17 +126,17 @@ public class MSBaseService: NSObject{
                     do {
                         let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                         guard let jsonDictionary = jsonObject as? [String:Any] else {
-                            completionHandler(nil,MSNetworkingError.response(message:"Response does not contain valid JSON dictionary."))
+                            failureCompletionHandler(MSNetworkingError.response(message:"Response does not contain valid JSON dictionary."))
                             return
                         }
                         json = jsonDictionary
                     } catch {
-                        completionHandler(nil,MSNetworkingError.response(message:"Response does not contain valid JSON."))
+                        failureCompletionHandler(MSNetworkingError.response(message:"Response does not contain valid JSON."))
                         return
                     }
 
                     let newError = NSError(domain: "com.mindstix.baseline", code: response.response?.statusCode ?? -1, userInfo: json)
-                    completionHandler(nil, newError)
+                    failureCompletionHandler(newError)
                 }
         }
     }
