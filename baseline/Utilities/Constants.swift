@@ -22,5 +22,6 @@ import Foundation
 
 struct Constants {
     static let city =  "Pune,in"
+    static let SOCIAL_LOGIN = true
 }
 

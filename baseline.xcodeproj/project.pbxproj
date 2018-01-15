@@ -19,7 +19,9 @@
 		A03CAACB1FECFBB200AE56DA /* baselineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03CAACA1FECFBB200AE56DA /* baselineUITests.swift */; };
 		A03CAB0E1FED271800AE56DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03CAB0C1FED271800AE56DA /* Localizable.strings */; };
 		A03CAB1A1FED31C800AE56DA /* MSBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03CAB191FED31C800AE56DA /* MSBaseService.swift */; };
+		A03DB0FD2008B3C000C5AA67 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03DB0FC2008B3C000C5AA67 /* LoginViewController.swift */; };
 		A05F45AD1FF2771D006ADD4F /* MSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F45AC1FF2771D006ADD4F /* MSNetworking.swift */; };
+		A07C086E2008D2C900714502 /* MSHomeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C086D2008D2C900714502 /* MSHomeContainer.swift */; };
 		A08124A51FFB5630002C2FC8 /* WeatherAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08124A41FFB5630002C2FC8 /* WeatherAPIHelper.swift */; };
 		A08124A91FFB59A5002C2FC8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08124A81FFB59A5002C2FC8 /* Constants.swift */; };
 		A09E08321FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E08311FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift */; };
@@ -76,7 +78,9 @@
 		A03CAACC1FECFBB200AE56DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03CAB0D1FED271800AE56DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = baseline/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A03CAB191FED31C800AE56DA /* MSBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSBaseService.swift; sourceTree = "<group>"; };
+		A03DB0FC2008B3C000C5AA67 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A05F45AC1FF2771D006ADD4F /* MSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSNetworking.swift; sourceTree = "<group>"; };
+		A07C086D2008D2C900714502 /* MSHomeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSHomeContainer.swift; sourceTree = "<group>"; };
 		A08124A41FFB5630002C2FC8 /* WeatherAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIHelper.swift; sourceTree = "<group>"; };
 		A08124A81FFB59A5002C2FC8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A09E08311FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 		A03CAAA91FECFBB200AE56DA /* baseline */ = {
 			isa = PBXGroup;
 			children = (
+				A07C086A2008D1AD00714502 /* RootController */,
 				A08124AE1FFCB5BA002C2FC8 /* Network */,
 				A08124A71FFB595D002C2FC8 /* Utilities */,
 				A09E081A1FF6406F008BA191 /* Model */,
@@ -251,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				A03CAAAC1FECFBB200AE56DA /* WeatherReportViewController.swift */,
+				A03DB0FC2008B3C000C5AA67 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -262,6 +268,30 @@
 				A05F45AC1FF2771D006ADD4F /* MSNetworking.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A07C086A2008D1AD00714502 /* RootController */ = {
+			isa = PBXGroup;
+			children = (
+				A07C086C2008D25300714502 /* Views */,
+				A07C086B2008D24600714502 /* ViewControllers */,
+			);
+			path = RootController;
+			sourceTree = "<group>";
+		};
+		A07C086B2008D24600714502 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A07C086D2008D2C900714502 /* MSHomeContainer.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A07C086C2008D25300714502 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A08124A71FFB595D002C2FC8 /* Utilities */ = {
@@ -526,18 +556,30 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-baseline/Pods-baseline-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SocialMediaLogin/SocialMediaLogin.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocialMediaLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,9 +671,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-baseline/Pods-baseline-resources.sh",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -675,6 +722,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A07C086E2008D2C900714502 /* MSHomeContainer.swift in Sources */,
 				A03CAB1A1FED31C800AE56DA /* MSBaseService.swift in Sources */,
 				A0CE750B1FFFAAF8001D9D67 /* WeatherDetailsModel.swift in Sources */,
 				A05F45AD1FF2771D006ADD4F /* MSNetworking.swift in Sources */,
@@ -683,6 +731,7 @@
 				A03CAAAD1FECFBB200AE56DA /* WeatherReportViewController.swift in Sources */,
 				A03CAAAB1FECFBB200AE56DA /* AppDelegate.swift in Sources */,
 				A09E08321FFA4ACA008BA191 /* ForecastDetailsTableViewCell.swift in Sources */,
+				A03DB0FD2008B3C000C5AA67 /* LoginViewController.swift in Sources */,
 				A08124A91FFB59A5002C2FC8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -804,8 +853,8 @@
 				BUNDLE_DISPLAY_NAME_SUFFIX = Dev;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEVELOPMENT_TEAM = M88382SDJS;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -815,6 +864,7 @@
 					CONFIGURATION_DEV,
 				);
 				INFOPLIST_FILE = baseline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.baseline.dev;
@@ -919,8 +969,8 @@
 				BUNDLE_DISPLAY_NAME_SUFFIX = QA;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEVELOPMENT_TEAM = M88382SDJS;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -930,6 +980,7 @@
 					CONFIGURATION_QA,
 				);
 				INFOPLIST_FILE = baseline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.baseline.qa;
@@ -1034,8 +1085,8 @@
 				BUNDLE_DISPLAY_NAME_SUFFIX = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEVELOPMENT_TEAM = M88382SDJS;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -1045,6 +1096,7 @@
 					CONFIGURATION_PROD,
 				);
 				INFOPLIST_FILE = baseline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindstix.baseline;
@@ -1149,8 +1201,8 @@
 				BUNDLE_DISPLAY_NAME_SUFFIX = Demo;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEVELOPMENT_TEAM = M88382SDJS;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -1160,6 +1212,7 @@
 					CONFIGURATION_DEMO,
 				);
 				INFOPLIST_FILE = baseline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindstix.baseline.demo;

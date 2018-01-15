@@ -7,6 +7,7 @@ target 'baseline' do
   pod 'Crashlytics', '~> 3.9.3'
   pod 'SDWebImage'
   pod 'AlamofireObjectMapper'
+  pod 'SocialMediaLogin', :path => '../SocialMediaLogin'
   
   target 'baselineTests' do
     inherit! :search_paths
